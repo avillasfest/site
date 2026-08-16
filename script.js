@@ -162,56 +162,56 @@ document.addEventListener("keydown", (e) => {
 });
 
 const REVIEWS = [
-  // {
-  //   nome: "Maria Silva",
-  //   texto: "Salão maravilhoso, atendimento excelente!",
-  //   estrelas: 5,
-  // },
-  // {
-  //   nome: "João Pereira",
-  //   texto: "Fizemos o aniversário da minha filha lá, adorei tudo.",
-  //   estrelas: 5,
-  // },
-  //   {
-  //   nome: "Maria Silva",
-  //   texto: "Salão maravilhoso, atendimento excelente!",
-  //   estrelas: 5,
-  // },
-  // {
-  //   nome: "João Pereira",
-  //   texto: "Fizemos o aniversário da minha filha lá, adorei tudo.",
-  //   estrelas: 5,
-  // },
-  //   {
-  //   nome: "Maria Silva",
-  //   texto: "Salão maravilhoso, atendimento excelente!",
-  //   estrelas: 5,
-  // },
-  // {
-  //   nome: "João Pereira",
-  //   texto: "Fizemos o aniversário da minha filha lá, adorei tudo.",
-  //   estrelas: 5,
-  // },
-  //   {
-  //   nome: "Maria Silva",
-  //   texto: "Salão maravilhoso, atendimento excelente!",
-  //   estrelas: 5,
-  // },
-  // {
-  //   nome: "João Pereira",
-  //   texto: "Fizemos o aniversário da minha filha lá, adorei tudo.",
-  //   estrelas: 5,
-  // },
-  //   {
-  //   nome: "Maria Silva",
-  //   texto: "Salão maravilhoso, atendimento excelente!",
-  //   estrelas: 5,
-  // },
-  // {
-  //   nome: "João Pereira",
-  //   texto: "Fizemos o aniversário da minha filha lá, adorei tudo.",
-  //   estrelas: 5,
-  // },
+  {
+    nome: "Maria Silva",
+    texto: "Salão maravilhoso, atendimento excelente!",
+    estrelas: 5,
+  },
+  {
+    nome: "João Pereira",
+    texto: "Fizemos o aniversário da minha filha lá, adorei tudo.",
+    estrelas: 5,
+  },
+    {
+    nome: "Maria Silva",
+    texto: "Salão maravilhoso, atendimento excelente!",
+    estrelas: 5,
+  },
+  {
+    nome: "João Pereira",
+    texto: "Fizemos o aniversário da minha filha lá, adorei tudo.",
+    estrelas: 5,
+  },
+    {
+    nome: "Maria Silva",
+    texto: "Salão maravilhoso, atendimento excelente!",
+    estrelas: 5,
+  },
+  {
+    nome: "João Pereira",
+    texto: "Fizemos o aniversário da minha filha lá, adorei tudo.",
+    estrelas: 5,
+  },
+    {
+    nome: "Maria Silva",
+    texto: "Salão maravilhoso, atendimento excelente!",
+    estrelas: 5,
+  },
+  {
+    nome: "João Pereira",
+    texto: "Fizemos o aniversário da minha filha lá, adorei tudo.",
+    estrelas: 5,
+  },
+    {
+    nome: "Maria Silva",
+    texto: "Salão maravilhoso, atendimento excelente!",
+    estrelas: 5,
+  },
+  {
+    nome: "João Pereira",
+    texto: "Fizemos o aniversário da minha filha lá, adorei tudo.",
+    estrelas: 5,
+  },
 ];
 
 let paginaAtualReviews = 1;
@@ -283,13 +283,31 @@ document.getElementById("prevPage")?.addEventListener("click", () => {
   if (paginaAtualReviews > 1) {
     paginaAtualReviews--;
     renderizarAvaliacoes();
+    scrollParaAvaliacoes();
   }
 });
 
 document.getElementById("nextPage")?.addEventListener("click", () => {
   paginaAtualReviews++;
   renderizarAvaliacoes();
+  scrollParaAvaliacoes();
 });
+
+function scrollParaAvaliacoes() {
+  const secao = document.getElementById("avaliacoes");
+  if (!secao) return;
+
+  const header = document.getElementById("siteHeader");
+  const headerHeight = header ? header.offsetHeight : 0;
+
+  const topoSecao =
+    secao.getBoundingClientRect().top + window.pageYOffset - headerHeight - 12;
+
+  window.scrollTo({
+    top: topoSecao,
+    behavior: "smooth",
+  });
+}
 
 document.addEventListener("DOMContentLoaded", renderizarAvaliacoes);
 

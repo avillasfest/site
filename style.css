@@ -28,7 +28,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.6s ease, visibility 0.6s ease;
+  transition:
+    opacity 0.6s ease,
+    visibility 0.6s ease;
 }
 
 .preloader.hidden {
@@ -65,20 +67,33 @@ body {
 }
 
 @keyframes pulseEmblem {
-  0%, 100% { transform: scale(1); box-shadow: 0 0 0 rgba(200, 155, 60, 0.4); }
-  50% { transform: scale(1.06); box-shadow: 0 0 25px rgba(200, 155, 60, 0.25); }
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(200, 155, 60, 0.4);
+  }
+  50% {
+    transform: scale(1.06);
+    box-shadow: 0 0 25px rgba(200, 155, 60, 0.25);
+  }
 }
 
 @keyframes spinRing {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* ===================== SCROLL REVEAL ===================== */
 .reveal {
   opacity: 0;
   transform: translateY(36px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
 }
 
 .reveal.visible {
@@ -101,7 +116,10 @@ header {
   z-index: 500;
   border-bottom: 1px solid transparent;
   border-image: linear-gradient(to right, transparent, #ffffff, transparent) 1;
-  transition: height 0.35s ease, padding 0.35s ease, box-shadow 0.35s ease;
+  transition:
+    height 0.35s ease,
+    padding 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 header.scrolled {
@@ -110,9 +128,9 @@ header.scrolled {
 }
 
 header a.ativo {
-  background-color: #c89b3c;
+  background-color: #e6b43d;;
   color: #1a1a1a;
-  padding: 12px 26px;
+  padding: 8px 26px;
   border-radius: 10px;
   font-size: 16px;
   font-weight: 600;
@@ -173,8 +191,17 @@ header a.ativo:active {
 }
 
 @keyframes floatPulse {
-  0%, 100% { box-shadow: 0 8px 22px rgba(0, 0, 0, 0.5), 0 0 0 0 rgba(37, 211, 102, 0.55); }
-  50% { box-shadow: 0 8px 22px rgba(0, 0, 0, 0.5), 0 0 0 12px rgba(37, 211, 102, 0); }
+  0%,
+  100% {
+    box-shadow:
+      0 8px 22px rgba(0, 0, 0, 0.5),
+      0 0 0 0 rgba(37, 211, 102, 0.55);
+  }
+  50% {
+    box-shadow:
+      0 8px 22px rgba(0, 0, 0, 0.5),
+      0 0 0 12px rgba(37, 211, 102, 0);
+  }
 }
 
 /* ===================== TYPEWRITER ===================== */
@@ -188,7 +215,7 @@ header a.ativo:active {
 }
 
 .cursor {
-  color: #ffffff;
+  color: lightgray;
   display: inline-block;
   margin-left: 3px;
   animation: blink 0.7s infinite;
@@ -211,7 +238,6 @@ header a.ativo:active {
   align-items: center;
   margin-top: 70px;
   margin-bottom: 70px;
-
   min-height: 64px;
 }
 
@@ -245,7 +271,9 @@ header a.ativo:active {
   object-fit: cover;
   cursor: pointer;
   border-radius: 10px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .carousel-image:hover {
@@ -337,7 +365,9 @@ header a.ativo:active {
   text-align: center;
   z-index: 1010;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
-  transition: transform 0.2s ease, background-color 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .close-button:hover {
@@ -589,7 +619,9 @@ header a.ativo:active {
   border-radius: 6px;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.25s ease, transform 0.2s ease;
+  transition:
+    background-color 0.25s ease,
+    transform 0.2s ease;
 }
 
 .page-btn:hover:not(:disabled) {
@@ -607,6 +639,46 @@ header a.ativo:active {
   font-weight: bold;
   min-width: 20px;
   text-align: center;
+}
+
+/* ===================== BOTÃO GOOGLE REVIEWS ===================== */
+.google-reviews-btn {
+  margin: 22px auto 0;
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 10px;
+  background-color: #ffffff;
+  color: #3c4043;
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border: 1px solid #dadce0;
+  border-radius: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  transition:
+    box-shadow 0.25s ease,
+    transform 0.2s ease,
+    background-color 0.25s ease;
+}
+
+.google-reviews-btn:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  background-color: #f8f9fa;
+  transform: translateY(-2px);
+}
+
+.google-reviews-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.google-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
 }
 
 /* ===================== GALERIA ===================== */
@@ -810,7 +882,10 @@ header a.ativo:active {
   opacity: 0;
   pointer-events: none;
   transform: translateY(12px);
-  transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.25s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    background-color 0.25s ease;
 }
 
 .back-to-top.visible {
@@ -890,8 +965,10 @@ textarea:focus-visible {
 @media (max-width: 768px) {
   /* HEADER */
   header {
-    flex-direction: column;
-    gap: 15px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
     height: auto;
   }
 
@@ -899,9 +976,16 @@ textarea:focus-visible {
     height: auto;
   }
 
+  .logoheader {
+    font-size: clamp(16px, 4.5vw, 22px);
+  }
+
   header a.ativo {
-    width: 100%;
+    width: auto;
+    padding: 10px 18px;
+    font-size: 14px;
     text-align: center;
+    white-space: nowrap;
   }
 
   .typing-box {
@@ -909,7 +993,7 @@ textarea:focus-visible {
   }
 
   #typing {
-    font-size: 1.9rem;
+    font-size: 1.6rem;
     text-align: center;
   }
 
@@ -982,11 +1066,13 @@ textarea:focus-visible {
 
   .footer h3 {
     text-align: center;
+    font-size: 18px;
   }
 
   .footer-link {
     justify-content: center;
     margin: 0 auto 16px;
+    font-size: 15px;
   }
 
   .map-container {
@@ -998,42 +1084,46 @@ textarea:focus-visible {
   }
 
   .wpp-float {
-    width: 52px;
-    height: 52px;
-    bottom: 18px;
+    width: 40px;
+    height: 40px;
+    bottom: 65px;
     right: 18px;
   }
 
   .back-to-top {
-    width: 42px;
-    height: 42px;
-    bottom: 18px;
-    left: 18px;
+    display: none !important;
   }
+
+  .agendamento-subtitle,
+  .avaliacoes-subtitle,
+  .galeria-subtitle {
+  font-size: 13px;
+}
 }
 
 /* responsividade */
 @media (max-width: 440px) {
   header {
     height: auto;
-    padding: 18px 16px;
-    flex-direction: column;
-    justify-content: center;
+    padding: 14px 12px;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    gap: 14px;
+    gap: 10px;
   }
 
   .logoheader {
     order: 1;
-    font-size: 25px;
-    text-align: center;
+    font-size: 16px;
+    text-align: left;
+    white-space: nowrap;
   }
 
   header a.ativo {
     order: 2;
     width: auto;
-    padding: 11px 22px;
-    font-size: 14px;
+    padding: 9px 14px;
+    font-size: 12px;
   }
 
   #reviewsWrapper {
@@ -1062,8 +1152,30 @@ textarea:focus-visible {
     flex-wrap: wrap;
   }
 
+  .google-reviews-btn {
+    width: 100%;
+    max-width: 310px;
+    justify-content: center;
+    font-size: 13px;
+    padding: 10px 14px;
+  }
+
   .footer-right {
     width: 100%;
+  }
+
+  .footer h3 {
+    font-size: 16px;
+  }
+
+  .footer-link {
+    font-size: 13px;
+    gap: 8px;
+  }
+
+  .footer-bottom {
+    font-size: 11px;
+    padding: 1 8px;
   }
 
   .map-container {
@@ -1082,7 +1194,7 @@ textarea:focus-visible {
 
   #typing {
     white-space: normal;
-    font-size: 1.4rem;
+    font-size: 1.15rem;
     text-align: center;
     padding: 0 10px;
     word-break: break-word;
