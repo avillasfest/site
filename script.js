@@ -162,56 +162,56 @@ document.addEventListener("keydown", (e) => {
 });
 
 const REVIEWS = [
-  {
-    nome: "Maria Silva",
-    texto: "Salão maravilhoso, atendimento excelente!",
-    estrelas: 5,
-  },
-  {
-    nome: "João Pereira",
-    texto: "Fizemos o aniversário da minha filha lá, adorei tudo.",
-    estrelas: 5,
-  },
-    {
-    nome: "Maria Silva",
-    texto: "Salão maravilhoso, atendimento excelente!",
-    estrelas: 5,
-  },
-  {
-    nome: "João Pereira",
-    texto: "Fizemos o aniversário da minha filha lá, adorei tudo.",
-    estrelas: 5,
-  },
-    {
-    nome: "Maria Silva",
-    texto: "Salão maravilhoso, atendimento excelente!",
-    estrelas: 5,
-  },
-  {
-    nome: "João Pereira",
-    texto: "Fizemos o aniversário da minha filha lá, adorei tudo.",
-    estrelas: 5,
-  },
-    {
-    nome: "Maria Silva",
-    texto: "Salão maravilhoso, atendimento excelente!",
-    estrelas: 5,
-  },
-  {
-    nome: "João Pereira",
-    texto: "Fizemos o aniversário da minha filha lá, adorei tudo.",
-    estrelas: 5,
-  },
-    {
-    nome: "Maria Silva",
-    texto: "Salão maravilhoso, atendimento excelente!",
-    estrelas: 5,
-  },
-  {
-    nome: "João Pereira",
-    texto: "Fizemos o aniversário da minha filha lá, adorei tudo.",
-    estrelas: 5,
-  },
+  // {
+  //   nome: "Maria Silva",
+  //   texto: "Salão maravilhoso, atendimento excelente!",
+  //   estrelas: 5,
+  // },
+  // {
+  //   nome: "João Pereira",
+  //   texto: "Fizemos o aniversário da minha filha lá, adorei tudo.",
+  //   estrelas: 5,
+  // },
+  //   {
+  //   nome: "Maria Silva",
+  //   texto: "Salão maravilhoso, atendimento excelente!",
+  //   estrelas: 5,
+  // },
+  // {
+  //   nome: "João Pereira",
+  //   texto: "Fizemos o aniversário da minha filha lá, adorei tudo.",
+  //   estrelas: 5,
+  // },
+  //   {
+  //   nome: "Maria Silva",
+  //   texto: "Salão maravilhoso, atendimento excelente!",
+  //   estrelas: 5,
+  // },
+  // {
+  //   nome: "João Pereira",
+  //   texto: "Fizemos o aniversário da minha filha lá, adorei tudo.",
+  //   estrelas: 5,
+  // },
+  //   {
+  //   nome: "Maria Silva",
+  //   texto: "Salão maravilhoso, atendimento excelente!",
+  //   estrelas: 5,
+  // },
+  // {
+  //   nome: "João Pereira",
+  //   texto: "Fizemos o aniversário da minha filha lá, adorei tudo.",
+  //   estrelas: 5,
+  // },
+  //   {
+  //   nome: "Maria Silva",
+  //   texto: "Salão maravilhoso, atendimento excelente!",
+  //   estrelas: 5,
+  // },
+  // {
+  //   nome: "João Pereira",
+  //   texto: "Fizemos o aniversário da minha filha lá, adorei tudo.",
+  //   estrelas: 5,
+  // },
 ];
 
 let paginaAtualReviews = 1;
