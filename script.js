@@ -46,117 +46,235 @@ function typeEffect() {
 
 typeEffect();
 
-//CARROSSEL
+// CARROSSEL
 const carouselTrack = document.querySelector(".carousel-track");
 const carouselContainer = document.querySelector(".carousel-container");
-let images = [...document.querySelectorAll(".carousel-image")];
 
-images.forEach((img) => {
+// Seleciona somente as cinco imagens originais
+const originalImages = [
+  ...carouselTrack.querySelectorAll(".carousel-image"),
+];
+
+// Duplica as imagens mantendo exatamente a mesma ordem:
+// 1, 2, 3, 4, 5, 1, 2, 3, 4, 5
+originalImages.forEach((img) => {
   const clone = img.cloneNode(true);
+
   clone.classList.add("clone");
-  carouselTrack.insertBefore(clone, carouselTrack.firstChild);
+  clone.setAttribute("aria-hidden", "true");
+
+  carouselTrack.appendChild(clone);
 });
 
-images = [...carouselTrack.querySelectorAll(".carousel-image")];
+// Seleciona as imagens originais e também as cópias
+const images = [
+  ...carouselTrack.querySelectorAll(".carousel-image"),
+];
 
-function waitImagesLoaded(imgEls) {
+// Calcula exatamente a distância correspondente
+// às cinco imagens originais
+function updateCarouselDistance() {
+  const trackStyles = getComputedStyle(carouselTrack);
+
+  const gap =
+    parseFloat(trackStyles.columnGap || trackStyles.gap) || 0;
+
+  const setWidth = originalImages.reduce(
+    (total, img) => {
+      return total + img.getBoundingClientRect().width;
+    },
+    0,
+  );
+
+  // Inclui os espaços existentes entre as imagens
+  // e o espaço entre os dois conjuntos
+  const carouselDistance =
+    setWidth + gap * originalImages.length;
+
+  carouselTrack.style.setProperty(
+    "--carousel-distance",
+    `${carouselDistance}px`,
+  );
+}
+
+// Aguarda as imagens originais carregarem
+function waitImagesLoaded(imgElements) {
   return Promise.all(
-    imgEls.map((img) => {
-      if (img.complete) return Promise.resolve();
-      return new Promise((res) => {
-        img.addEventListener("load", res, { once: true });
-        img.addEventListener("error", res, { once: true });
+    imgElements.map((img) => {
+      if (img.complete) {
+        return Promise.resolve();
+      }
+
+      return new Promise((resolve) => {
+        img.addEventListener("load", resolve, {
+          once: true,
+        });
+
+        img.addEventListener("error", resolve, {
+          once: true,
+        });
       });
     }),
   );
 }
 
-const allImgs = [...carouselTrack.querySelectorAll(".carousel-image")];
+// Inicia o carrossel depois do carregamento
+waitImagesLoaded(originalImages).then(() => {
+  updateCarouselDistance();
 
-waitImagesLoaded(allImgs).then(() => {
   carouselTrack.style.animationPlayState = "running";
 });
 
-const modalOverlay = document.querySelector(".modal-overlay");
-const modalImage = document.querySelector(".modal-image");
-const closeButton = document.querySelector(".close-button");
+// Recalcula a distância quando o tamanho da tela mudar
+window.addEventListener(
+  "resize",
+  updateCarouselDistance,
+);
+
+// MODAL DAS IMAGENS
+const modalOverlay =
+  document.querySelector(".modal-overlay");
+
+const modalImage =
+  document.querySelector(".modal-image");
+
+const closeButton =
+  document.querySelector(".close-button");
 
 let isZoomed = false;
 
+// Pausa o carrossel
 function pauseCarousel() {
   carouselTrack.style.animationPlayState = "paused";
 }
 
+// Continua o carrossel
 function playCarousel() {
-  if (!isZoomed) carouselTrack.style.animationPlayState = "running";
+  if (!isZoomed) {
+    carouselTrack.style.animationPlayState = "running";
+  }
 }
 
-carouselContainer.addEventListener("mouseenter", pauseCarousel);
-carouselContainer.addEventListener("mouseleave", playCarousel);
+// Pausa quando o mouse estiver sobre o carrossel
+carouselContainer.addEventListener(
+  "mouseenter",
+  pauseCarousel,
+);
 
+// Continua quando o mouse sair
+carouselContainer.addEventListener(
+  "mouseleave",
+  playCarousel,
+);
+
+// Ajusta a imagem dentro do modal
 function fitModalImage() {
-  const natW = modalImage.naturalWidth;
-  const natH = modalImage.naturalHeight;
-  if (!natW || !natH) return;
+  const naturalWidth = modalImage.naturalWidth;
+  const naturalHeight = modalImage.naturalHeight;
 
-  const maxW = window.innerWidth * 0.9;
-  const maxH = window.innerHeight * 0.85;
+  if (!naturalWidth || !naturalHeight) {
+    return;
+  }
 
-  // Escala a imagem para preencher o máximo de espaço possível
-  // (permitindo ampliar imagens pequenas), mantendo a proporção.
-  const scale = Math.min(maxW / natW, maxH / natH);
+  const maxWidth = window.innerWidth * 0.9;
+  const maxHeight = window.innerHeight * 0.85;
 
-  modalImage.style.width = `${natW * scale}px`;
-  modalImage.style.height = `${natH * scale}px`;
+  const scale = Math.min(
+    maxWidth / naturalWidth,
+    maxHeight / naturalHeight,
+  );
+
+  modalImage.style.width =
+    `${naturalWidth * scale}px`;
+
+  modalImage.style.height =
+    `${naturalHeight * scale}px`;
 }
 
+// Abre o modal
 function openModal(src) {
   pauseCarousel();
+
   isZoomed = true;
 
-  // Limpa o tamanho anterior para não "herdar" as dimensões da imagem passada.
   modalImage.style.width = "";
   modalImage.style.height = "";
   modalImage.src = src;
 
-  if (modalImage.complete && modalImage.naturalWidth) {
+  if (
+    modalImage.complete &&
+    modalImage.naturalWidth
+  ) {
     fitModalImage();
   }
 
   modalOverlay.style.display = "flex";
+
+  // Força o navegador a reconhecer o display
+  // antes de executar a animação
   modalOverlay.offsetHeight;
+
   modalOverlay.classList.add("active");
+
   document.body.style.overflow = "hidden";
 }
 
-modalImage.addEventListener("load", fitModalImage);
+// Ajusta quando a imagem do modal carregar
+modalImage.addEventListener(
+  "load",
+  fitModalImage,
+);
+
+// Ajusta o modal quando a tela mudar de tamanho
 window.addEventListener("resize", () => {
-  if (modalOverlay.classList.contains("active")) fitModalImage();
+  if (
+    modalOverlay.classList.contains("active")
+  ) {
+    fitModalImage();
+  }
 });
 
+// Fecha o modal
 function closeModal() {
   modalOverlay.classList.remove("active");
+
   document.body.style.overflow = "";
 
   setTimeout(() => {
     modalOverlay.style.display = "none";
     modalImage.src = "";
     isZoomed = false;
+
     playCarousel();
   }, 400);
 }
 
+// Adiciona o clique nas imagens originais e clonadas
 images.forEach((img) => {
-  img.addEventListener("click", () => openModal(img.src));
+  img.addEventListener("click", () => {
+    openModal(img.src);
+  });
 });
 
-closeButton.addEventListener("click", closeModal);
-modalOverlay.addEventListener("click", (e) => {
-  if (e.target === modalOverlay) closeModal();
+// Fecha pelo botão
+closeButton.addEventListener(
+  "click",
+  closeModal,
+);
+
+// Fecha clicando fora da imagem
+modalOverlay.addEventListener("click", (event) => {
+  if (event.target === modalOverlay) {
+    closeModal();
+  }
 });
 
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && modalOverlay.classList.contains("active")) {
+// Fecha apertando Escape
+document.addEventListener("keydown", (event) => {
+  if (
+    event.key === "Escape" &&
+    modalOverlay.classList.contains("active")
+  ) {
     closeModal();
   }
 });

@@ -242,6 +242,7 @@ header a.ativo:active {
 }
 
 /* ===================== CARROSSEL ===================== */
+
 .carousel-container {
   width: 100%;
   overflow: hidden;
@@ -251,13 +252,19 @@ header a.ativo:active {
 
 .carousel-track {
   display: flex;
+  align-items: center;
   gap: 20px;
   width: max-content;
-  align-items: center;
-  animation: scrollRight 25s linear infinite;
+
+  /*
+    Começa deslocado para a esquerda e caminha até zero.
+    Dessa maneira, as imagens percorrem da esquerda
+    para a direita.
+  */
+  animation: scrollInfinite 25s linear infinite;
   animation-play-state: paused;
+
   will-change: transform;
-  transform: translateZ(0);
 }
 
 .carousel-container:hover .carousel-track {
@@ -271,6 +278,7 @@ header a.ativo:active {
   object-fit: cover;
   cursor: pointer;
   border-radius: 10px;
+
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
@@ -278,9 +286,12 @@ header a.ativo:active {
 
 .carousel-image:hover {
   transform: scale(1.05);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.5);
 }
 
+/* Efeito escuro nas laterais */
 .carousel-fade {
   position: absolute;
   top: 0;
@@ -292,25 +303,66 @@ header a.ativo:active {
 
 .carousel-fade-left {
   left: 0;
-  background: linear-gradient(to right, rgb(25, 22, 18), transparent);
+
+  background:
+    linear-gradient(
+      to right,
+      rgb(25, 22, 18),
+      transparent
+    );
 }
 
 .carousel-fade-right {
   right: 0;
-  background: linear-gradient(to left, rgb(25, 22, 18), transparent);
+
+  background:
+    linear-gradient(
+      to left,
+      rgb(25, 22, 18),
+      transparent
+    );
 }
 
-/*MODAL OVERLAY*/
+/*
+  A animação começa na segunda cópia do conjunto
+  e termina exatamente na primeira cópia.
+
+  Visualmente, o ponto inicial e o ponto final são
+  iguais. Por isso não existe salto.
+
+  A direção é da esquerda para a direita.
+*/
+@keyframes scrollInfinite {
+  from {
+    transform:
+      translateX(
+        calc(-1 * var(--carousel-distance))
+      );
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* ===================== MODAL ===================== */
+
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.85);
+
+  background-color:
+    rgba(0, 0, 0, 0.85);
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   z-index: 1000;
+
   opacity: 0;
   pointer-events: none;
+
   transition: opacity 0.4s ease;
 }
 
@@ -322,10 +374,13 @@ header a.ativo:active {
 .modal-content {
   display: inline-flex;
   position: relative;
+
   max-width: 90vw;
   max-height: 85vh;
+
   transform: scale(0.75);
   opacity: 0;
+
   transition:
     transform 0.4s ease,
     opacity 0.4s ease;
@@ -338,50 +393,61 @@ header a.ativo:active {
 
 .modal-image {
   display: block;
+
   width: auto;
   height: auto;
+
   max-width: 90vw;
   max-height: 85vh;
+
   object-fit: contain;
   border-radius: 12px;
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+
+  box-shadow:
+    0 0 40px rgba(0, 0, 0, 0.8);
 }
 
 .close-button {
   position: absolute;
   top: 0;
   right: 0;
+
   transform: translate(50%, -50%);
+
   background-color: #c89b3c;
-  border: 3px solid rgb(25, 22, 18);
+
+  border:
+    3px solid rgb(25, 22, 18);
+
   color: white;
   font-size: 1.6rem;
   font-weight: bold;
+
   cursor: pointer;
   border-radius: 50%;
+
   width: 42px;
   height: 42px;
+
   line-height: 36px;
   text-align: center;
+
   z-index: 1010;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.6);
+
   transition:
     transform 0.2s ease,
     background-color 0.2s ease;
 }
 
 .close-button:hover {
-  transform: translate(50%, -50%) scale(1.1);
-  background-color: #e1b737;
-}
+  transform:
+    translate(50%, -50%)
+    scale(1.1);
 
-@keyframes scrollRight {
-  from {
-    transform: translateX(-50%);
-  }
-  to {
-    transform: translateX(0%);
-  }
+  background-color: #e1b737;
 }
 
 /* ===================== AGENDAMENTO ===================== */
