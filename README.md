@@ -173,16 +173,6 @@ site/
 
 ---
 
-## 🚧 Estado atual
-
-O site já tem a **estrutura principal pronta**, com todas as seções funcionando. Alguns pontos ainda aguardam conteúdo ou ajuste:
-
-- **Avaliações:** os cartões ainda mostram textos de exemplo (*Maria Silva* e *João Pereira*, repetidos). Quando os depoimentos reais forem inseridos, essa seção passa a ser a melhor prova de qualidade do salão.
-- **Fontes:** o CSS pede *Playfair Display* e *Montserrat*, mas o `index.html` ainda não carrega essas fontes (por exemplo, pelo Google Fonts). Por isso, hoje quem visita vê as fontes de reserva (*Times New Roman* e *Arial*), a não ser que as tenha instalado.
-- **Fotos sem uso:** quatro arquivos da pasta `assets/` ainda não aparecem no site (`churrasqueira.jpg`, `churrasqueira-fogao.jpg`, `salao-banheiro.jpg` e `SALAO DE FESTA.webp`). Podem entrar na galeria ou ser removidos.
-
----
-
 <div align="center">
 
 **D' Avillas Fest** · *Festas & Eventos em Uberlândia/MG*
